@@ -5,15 +5,27 @@ from .models import Product;
 
 # Create your views here.
 def product_create_view(request):
-    form = ProductForm(request.POST or None);
-    if form.is_valid():
-        form.save();
-        form = ProductForm();
+    # print(request.GET);
+    # print(request.POST);
+    if request.method == "POST":
+        my_new_title = request.POST.get('title');
+        print(my_new_title);
+        # Product.objects.create(title=my_new_title)
+    context = {}
 
-    context = {
-        'form': form
-    }
     return render(request, "products/product_create.html", context);
+
+
+# def product_create_view(request):
+#     form = ProductForm(request.POST or None);
+#     if form.is_valid():
+#         form.save();
+#         form = ProductForm();
+
+#     context = {
+#         'form': form
+#     }
+#     return render(request, "products/product_create.html", context);
 
 
 def product_detail_view(request):
